@@ -19,7 +19,7 @@ const grupos = (Object.keys(CATEGORIAS) as CategoriaId[])
 	<div class="contenedor pagina">
 		<h1>Blog</h1>
 		{
-			BLOG_ABIERTO && grupos.length > 0 ? (
+			grupos.length > 0 ? (
 				grupos.map((g) => (
 					<section class="grupo" aria-labelledby={`g-${g.id}`}>
 						<div class="grupo-cab">
