@@ -1,63 +1,27 @@
-# Astro Starter Kit: Blog
+# Jardín de Bits
 
-```sh
-npm create astro@latest -- --template blog
-```
+Web de [jardinbits.com](https://jardinbits.com), hecha con Astro y publicada en Cloudflare. Cada `git push` a `main` la despliega.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Escribir un artículo
 
-Features:
+1. Copia `src/content/blog/_plantilla-articulo.mdx` con un nombre en minúsculas y con guiones, por ejemplo `cisco-ccst-paso-a-paso.mdx`. El nombre será la URL (`/blog/cisco-ccst-paso-a-paso/`).
+2. Rellena la cabecera (título, descripción, categoría, madurez, fechas, `afiliado`). Si falta un campo obligatorio, `npm run build` falla: es a propósito.
+3. Mientras escribes deja `borrador: true`: el archivo se sube al repositorio pero no se publica.
+4. Antes de publicar: pasa el texto por Verificación (cifras, precios, comisiones y fechas) y pon su fecha en `revisado`.
+5. Cambia a `borrador: false`.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+Si el artículo lleva un enlace con comisión, pon `afiliado: true` (muestra el aviso) y añade `rel="sponsored"` al enlace.
 
-## 🚀 Project Structure
+## Abrir el blog
 
-Inside of your Astro project, you'll see the following folders and files:
+En `src/consts.ts`, `BLOG_ABIERTO = false` mantiene cerrado el blog: no se genera ningún artículo, `/blog/` muestra un aviso y `robots.txt` impide indexar todo el sitio. Al pasarlo a `true` (Puerta 1 del tablero) se publican los artículos que no sean borrador, se añaden al sitemap y `robots.txt` abre el sitio a los buscadores.
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+Otros interruptores en `src/consts.ts`: `ANUNCIOS_ACTIVOS` (Puerta 2, con gestor de consentimiento) y `CONTACT_EMAIL` (se muestra en /contacto/ cuando lo rellenes).
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Comandos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `npm run dev`: servidor local en http://localhost:4321
+- `npm run build`: genera `dist/` y valida los artículos
+- `npm run preview`: sirve `dist/` en local
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Requiere Node 22.22 o superior (`.node-version`).

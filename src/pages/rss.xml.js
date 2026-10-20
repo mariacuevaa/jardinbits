@@ -1,10 +1,9 @@
-import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
-import { BLOG_ABIERTO, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getPublicados } from '../lib/posts';
 
 export async function GET(context) {
-	// Con el blog cerrado el feed sale vacío.
-	const posts = BLOG_ABIERTO ? await getCollection('blog') : [];
+	const posts = await getPublicados();
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,

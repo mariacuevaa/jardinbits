@@ -1,0 +1,44 @@
+---
+import Brote from '../components/Brote.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Página no encontrada" description="Esta página no existe o ha cambiado de sitio." noindex>
+	<div class="contenedor pagina">
+		<div class="arte"><Brote /></div>
+		<div>
+			<h1>No encuentro esta página</h1>
+			<p class="entradilla">Puede que la dirección esté mal escrita o que el contenido haya cambiado de sitio.</p>
+			<p class="acciones">
+				<a class="boton" href="/">Volver al inicio</a>
+				<a class="boton boton-claro" href="/contacto/">Avisarme del enlace roto</a>
+			</p>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		display: grid;
+		gap: 2rem 4rem;
+		align-items: center;
+		padding-block: clamp(2.5rem, 7vw, 5rem) 0;
+	}
+	@media (min-width: 46rem) {
+		.pagina {
+			grid-template-columns: 14rem 1fr;
+		}
+	}
+	.arte {
+		width: 10rem;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.acciones {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 1.25rem;
+		margin-top: 1.5rem;
+	}
+</style>

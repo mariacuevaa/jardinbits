@@ -1,15 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import EtiquetaMadurez from '../../components/EtiquetaMadurez.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { BLOG_ABIERTO, CATEGORIAS, type CategoriaId } from '../../consts';
 import Base from '../../layouts/Base.astro';
+import { getPublicados } from '../../lib/posts';
 
-const posts = BLOG_ABIERTO
-	? (await getCollection('blog'))
-			.filter((p) => p.data.idioma === 'es')
-			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-	: [];
+const posts = (await getPublicados()).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const grupos = (Object.keys(CATEGORIAS) as CategoriaId[])
 	.map((id) => ({ id, ...CATEGORIAS[id], posts: posts.filter((p) => p.data.category === id) }))
 	.filter((g) => g.posts.length > 0);

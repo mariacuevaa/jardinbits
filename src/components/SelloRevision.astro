@@ -8,7 +8,7 @@ const texto = fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long'
 
 <p class="sello">
 	<svg viewBox="0 0 10 10" width="10" height="10" aria-hidden="true"><rect width="10" height="10" fill="currentColor"></rect></svg>
-	Revisado el <time datetime={fecha.toISOString().slice(0, 10)}>{texto}</time>
+	<span>Revisado el <time datetime={fecha.toISOString().slice(0, 10)}>{texto}</time></span>
 </p>
 
 <style>

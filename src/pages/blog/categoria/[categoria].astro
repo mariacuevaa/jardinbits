@@ -1,12 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import EtiquetaMadurez from '../../../components/EtiquetaMadurez.astro';
-import { BLOG_ABIERTO, CATEGORIAS, type CategoriaId } from '../../../consts';
+import { CATEGORIAS, type CategoriaId } from '../../../consts';
+import { getPublicados } from '../../../lib/posts';
 import Base from '../../../layouts/Base.astro';
 
 export async function getStaticPaths() {
-	if (!BLOG_ABIERTO) return [];
-	const posts = await getCollection('blog');
+	const posts = await getPublicados();
 	return (Object.keys(CATEGORIAS) as CategoriaId[]).map((id) => ({
 		params: { categoria: id },
 		props: {
