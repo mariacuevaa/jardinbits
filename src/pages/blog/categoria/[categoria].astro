@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import EtiquetaMadurez from '../../../components/EtiquetaMadurez.astro';
+import { BLOG_ABIERTO, CATEGORIAS, type CategoriaId } from '../../../consts';
+import Base from '../../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+	if (!BLOG_ABIERTO) return [];
+	const posts = await getCollection('blog');
+	return (Object.keys(CATEGORIAS) as CategoriaId[]).map((id) => ({
+		params: { categoria: id },
+		props: {
+			id,
+			posts: posts
+				.filter((p) => p.data.category === id)
+				.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+		},
+	}));
+}
+
+const { id, posts } = Astro.props;
+const c = CATEGORIAS[id as CategoriaId];
+---
+
+<Base title={c.nombre} description={c.descripcion}>
+	<div class="contenedor pagina">
+		<h1>{c.nombre}</h1>
+		<p class="entradilla">{c.descripcion}</p>
+		{
+			posts.length === 0 ? (
+				<p>Aquí todavía no hay guías.</p>
+			) : (
+				<ul class="lista">
+					{posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+							<EtiquetaMadurez madurez={post.data.madurez} />
+						</li>
+					))}
+				</ul>
+			)
+		}
+		<p><a href="/blog/">← Todo el blog</a></p>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.lista {
+		margin: 2rem 0;
+		padding: 0;
+		list-style: none;
+		border-top: 2px solid var(--verde-bosque);
+	}
+	.lista li {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem 1rem;
+		padding-block: 1rem;
+		border-bottom: 2px solid var(--verde-bosque);
+		font-family: var(--fuente-titulos);
+		font-size: 1.3rem;
+	}
+</style>

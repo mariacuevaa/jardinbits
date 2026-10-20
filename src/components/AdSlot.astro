@@ -1,0 +1,23 @@
+---
+// Hueco de anuncio de altura fija para que la página no se mueva al activar anuncios.
+// Solo se pinta si ANUNCIOS_ACTIVOS es true (Puerta 2, con gestor de consentimiento instalado).
+import { ANUNCIOS_ACTIVOS } from '../consts';
+interface Props {
+	altura?: number;
+}
+const { altura = 280 } = Astro.props;
+---
+
+{
+	ANUNCIOS_ACTIVOS && (
+		<div class="ad-slot" style={`min-height:${altura}px`} aria-label="Publicidad">
+			<!-- Código del anuncio aquí -->
+		</div>
+	)
+}
+
+<style>
+	.ad-slot {
+		margin: 2.5rem 0;
+	}
+</style>

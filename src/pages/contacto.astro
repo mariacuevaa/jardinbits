@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT_EMAIL } from '../consts';
+---
+
+<Base title="Contacto" description="Escríbeme una duda, una corrección o una idea para Jardín de Bits.">
+	<div class="contenedor pagina">
+		<h1>Contacto</h1>
+		<div class="lectura">
+			<p class="entradilla">
+				¿Una duda, un error en una guía o una idea para un artículo? Cuéntamelo. Me ayuda a mantener el jardín al día.
+			</p>
+			{
+				CONTACT_EMAIL ? (
+					<p>
+						<a class="boton" href={`mailto:${CONTACT_EMAIL}`}>
+							{CONTACT_EMAIL}
+						</a>
+					</p>
+				) : (
+					<p class="pendiente">
+						Estoy terminando de activar el correo de contacto. En cuanto esté listo, lo verás aquí.
+					</p>
+				)
+			}
+			<h2>Antes de escribir</h2>
+			<ul>
+				<li>Si encuentras una cifra o un precio desactualizado, dime en qué artículo y lo reviso.</li>
+			</ul>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.pendiente {
+		padding: 1rem 1.2rem;
+		border-left: 6px solid var(--lila);
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+	}
+</style>

@@ -1,0 +1,174 @@
+---
+// Logo de Jardín de Bits: brote sobre un píxel. Con `animar` crece una vez al cargar.
+interface Props {
+	animar?: boolean;
+	class?: string;
+	titulo?: string;
+}
+const { animar = false, class: className, titulo } = Astro.props;
+
+// Celdas de 89 px en la cuadrícula del logo original.
+const celdas = [
+	{ x: 498, y: 732, c: 'bosque' },
+	{ x: 587, y: 732, c: 'salvia' },
+	{ x: 498, y: 822, c: 'salvia' },
+	{ x: 587, y: 822, c: 'bosque' },
+	{ x: 676, y: 822, c: 'salvia' },
+	{ x: 498, y: 912, c: 'bosque' },
+	{ x: 587, y: 912, c: 'salvia' },
+	{ x: 676, y: 912, c: 'bosque' },
+];
+---
+
+<svg
+	viewBox="330 240 600 770"
+	class:list={['brote', { animar }, className]}
+	role={titulo ? 'img' : undefined}
+	aria-label={titulo}
+	aria-hidden={titulo ? undefined : 'true'}
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<g class="chispas">
+		<rect class="ch ch1" x="609" y="253" width="31" height="31" fill="var(--salvia)"></rect>
+		<rect class="ch ch2" x="550" y="332" width="31" height="31" fill="var(--durazno)"></rect>
+		<rect class="ch ch3" x="680" y="346" width="31" height="31" fill="var(--lila)"></rect>
+	</g>
+	<path
+		class="tallo"
+		d="M630 735V690C630 655 610 640 580 608M630 690C630 655 650 640 684 608"
+		fill="none"
+		stroke="var(--salvia)"
+		stroke-width="24"
+		stroke-linecap="round"
+		pathLength="1"></path>
+	<g class="hoja hoja-izq">
+		<path
+			d="M588 617C520 620 440 600 390 540C350 490 340 430 345 393C420 378 520 395 565 480C585 520 592 570 588 617Z"
+			fill="var(--salvia)"></path>
+		<path
+			class="vena"
+			d="M582 606L430 462M505 545C485 545 465 543 452 540M498 520C505 508 505 495 497 485"
+			fill="none"
+			stroke="var(--durazno)"
+			stroke-width="9"
+			stroke-linecap="round"></path>
+	</g>
+	<g class="hoja hoja-der">
+		<path
+			d="M674 617C742 620 822 600 872 540C912 490 922 430 917 393C842 378 742 395 697 480C677 520 670 570 674 617Z"
+			fill="var(--lila)"></path>
+		<path
+			class="vena"
+			d="M678 606L830 462M757 545C777 545 797 543 810 540M764 520C757 508 757 495 765 485"
+			fill="none"
+			stroke="var(--durazno)"
+			stroke-width="9"
+			stroke-linecap="round"></path>
+	</g>
+	<g class="suelo">
+		{
+			celdas.map((c, i) => (
+				<rect
+					class="celda"
+					style={`--i:${i}`}
+					x={c.x + 1}
+					y={c.y + 1}
+					width="87"
+					height="88"
+					fill={c.c === 'bosque' ? 'var(--verde-bosque)' : 'var(--salvia)'}
+				/>
+			))
+		}
+	</g>
+</svg>
+
+<style>
+	.brote {
+		display: block;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.animar .celda {
+			transform-box: fill-box;
+			transform-origin: 50% 100%;
+			animation: aparece 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+			animation-delay: calc(0.12s * var(--i));
+		}
+		.animar .tallo {
+			stroke-dasharray: 1;
+			stroke-dashoffset: 1;
+			animation: dibuja 0.7s ease-out 1.05s forwards;
+		}
+		.animar .hoja {
+			transform-box: view-box;
+			animation: abre 0.8s cubic-bezier(0.2, 1.2, 0.4, 1) both;
+		}
+		.animar .hoja-izq {
+			transform-origin: 588px 617px;
+			animation-delay: 1.65s;
+		}
+		.animar .hoja-der {
+			transform-origin: 674px 617px;
+			animation-delay: 1.8s;
+		}
+		.animar .vena {
+			animation: aparecer-vena 0.5s ease-out 2.3s both;
+		}
+		.animar .ch {
+			transform-box: fill-box;
+			transform-origin: center;
+			animation: chispa 0.6s ease-out both;
+		}
+		.animar .ch1 {
+			animation-delay: 2.2s;
+		}
+		.animar .ch2 {
+			animation-delay: 2.35s;
+		}
+		.animar .ch3 {
+			animation-delay: 2.5s;
+		}
+	}
+	@keyframes aparece {
+		from {
+			transform: scale(0);
+			opacity: 0;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+	@keyframes dibuja {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+	@keyframes abre {
+		from {
+			transform: scale(0);
+			opacity: 0;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+	@keyframes aparecer-vena {
+		from {
+			opacity: 0;
+		}
+	}
+	@keyframes chispa {
+		from {
+			transform: translateY(24px) scale(0);
+			opacity: 0;
+		}
+		to {
+			transform: none;
+			opacity: 1;
+		}
+	}
+</style>

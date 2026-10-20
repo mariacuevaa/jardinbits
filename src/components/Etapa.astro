@@ -1,0 +1,75 @@
+---
+// Planta en píxeles para cada etapa de madurez. Cada letra es una celda:
+// B = verde bosque, S = salvia, L = lila, D = durazno, . = vacío.
+import type { MadurezId } from '../consts';
+
+interface Props {
+	etapa: MadurezId;
+	celda?: number;
+}
+const { etapa, celda = 14 } = Astro.props;
+
+const dibujos: Record<MadurezId, string[]> = {
+	semilla: [
+		'....D....',
+		'...DDD...',
+		'BSBSBSBSB',
+		'SBSBSBSBS',
+	],
+	brote: [
+		'.SS...LL.',
+		'.SSS.LLL.',
+		'..SSSLL..',
+		'....S....',
+		'....S....',
+		'BSBSBSBSB',
+		'SBSBSBSBS',
+	],
+	arbol: [
+		'...SSS...',
+		'..SSLSS..',
+		'.SSLLLSS.',
+		'.SSLLLSS.',
+		'..SSSSS..',
+		'...SSS...',
+		'....B....',
+		'....B....',
+		'....B....',
+		'BSBSBSBSB',
+		'SBSBSBSBS',
+	],
+};
+const color: Record<string, string> = {
+	B: 'var(--verde-bosque)',
+	S: 'var(--salvia)',
+	L: 'var(--lila)',
+	D: 'var(--durazno)',
+};
+const filas = dibujos[etapa];
+const ancho = filas[0].length;
+---
+
+<svg
+	viewBox={`0 0 ${ancho} ${filas.length}`}
+	width={ancho * celda}
+	height={filas.length * celda}
+	shape-rendering="crispEdges"
+	aria-hidden="true"
+	class="etapa"
+>
+	{
+		filas.flatMap((fila, y) =>
+			[...fila].map((ch, x) =>
+				ch === '.' ? null : <rect x={x} y={y} width="1" height="1" fill={color[ch]} />,
+			),
+		)
+	}
+</svg>
+
+<style>
+	.etapa {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+</style>

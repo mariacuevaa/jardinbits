@@ -1,0 +1,50 @@
+---
+// Caja de veredicto de la marca: "Ideal si..." y "No lo elijas si...".
+interface Props {
+	ideal: string;
+	noElijas: string;
+}
+const { ideal, noElijas } = Astro.props;
+---
+
+<div class="veredicto">
+	<div class="lado lado-si">
+		<h3>Ideal si…</h3>
+		<p>{ideal}</p>
+	</div>
+	<div class="lado lado-no">
+		<h3>No lo elijas si…</h3>
+		<p>{noElijas}</p>
+	</div>
+</div>
+
+<style>
+	.veredicto {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		border: 2px solid var(--verde-bosque);
+		background: var(--crema);
+		box-shadow: 6px 6px 0 var(--salvia);
+	}
+	.lado {
+		padding: 1.4rem 1.5rem 1.2rem;
+		border-left: 8px solid var(--lila);
+	}
+	.lado-no {
+		border-left-color: var(--durazno);
+		border-top: 2px solid var(--verde-bosque);
+	}
+	@media (min-width: 40rem) {
+		.lado-no {
+			border-top: 0;
+			border-left: 8px solid var(--durazno);
+		}
+	}
+	h3 {
+		margin: 0 0 0.4rem;
+		font-size: 1.3rem;
+	}
+	p {
+		margin: 0;
+	}
+</style>

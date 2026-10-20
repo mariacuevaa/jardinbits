@@ -1,0 +1,34 @@
+---
+import { MADUREZ, type MadurezId } from '../consts';
+interface Props {
+	madurez: MadurezId;
+}
+const { madurez } = Astro.props;
+---
+
+<span class={`etiqueta etiqueta-${madurez}`} title={MADUREZ[madurez].descripcion}>
+	{MADUREZ[madurez].nombre}
+</span>
+
+<style>
+	.etiqueta {
+		display: inline-block;
+		padding: 0.1em 0.7em 0.15em;
+		border: 2px solid var(--verde-bosque);
+		border-radius: 2px;
+		color: var(--tinta);
+		font-size: 0.85rem;
+		font-weight: 600;
+		line-height: 1.4;
+		white-space: nowrap;
+	}
+	.etiqueta-semilla {
+		background: var(--lila);
+	}
+	.etiqueta-brote {
+		background: var(--salvia);
+	}
+	.etiqueta-arbol {
+		background: var(--durazno);
+	}
+</style>

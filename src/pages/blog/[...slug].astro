@@ -1,8 +1,11 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { BLOG_ABIERTO } from '../../consts';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
+	// Con el blog cerrado no se genera ningún artículo.
+	if (!BLOG_ABIERTO) return [];
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
 		params: { slug: post.id },

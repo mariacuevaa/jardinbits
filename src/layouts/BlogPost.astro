@@ -1,84 +1,71 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import AvisoAfiliado from '../components/AvisoAfiliado.astro';
+import EtiquetaMadurez from '../components/EtiquetaMadurez.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import SelloRevision from '../components/SelloRevision.astro';
+import { CATEGORIAS } from '../consts';
+import Base from './Base.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, category, madurez, pubDate, revisado, afiliado, heroImage } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<Base title={title} description={description}>
+	<article class="contenedor articulo">
+		<header class="cabecera-articulo">
+			<p class="categoria">
+				<a href={`/blog/categoria/${category}/`}>{CATEGORIAS[category].nombre}</a>
+			</p>
+			<h1>{title}</h1>
+			<p class="descripcion">{description}</p>
+			<div class="meta">
+				<EtiquetaMadurez madurez={madurez} />
+				<SelloRevision fecha={revisado} />
+				<span class="publicado">Publicado el <FormattedDate date={pubDate} /></span>
+			</div>
+		</header>
+		{heroImage && <Image class="hero-img" width={1020} height={510} src={heroImage} alt="" />}
+		<div class="lectura">
+			{afiliado && <AvisoAfiliado />}
+			<slot />
+			<AdSlot />
+		</div>
+	</article>
+</Base>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{updatedDate && (
-								<div class="last-updated-on">
-									Last updated on <FormattedDate date={updatedDate} />
-								</div>
-							)}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<style>
+	.articulo {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.cabecera-articulo {
+		max-width: var(--ancho-lectura);
+		margin-bottom: 2.5rem;
+	}
+	.categoria {
+		margin-bottom: 0.6rem;
+		font-weight: 600;
+	}
+	.descripcion {
+		font-size: 1.25rem;
+	}
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem 1rem;
+		margin-top: 1.4rem;
+	}
+	.publicado {
+		font-size: 0.9rem;
+	}
+	.hero-img {
+		display: block;
+		margin-bottom: 2.5rem;
+		border: 2px solid var(--verde-bosque);
+		border-radius: 2px;
+	}
+</style>
