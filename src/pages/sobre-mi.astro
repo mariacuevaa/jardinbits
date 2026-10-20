@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<Base title="Sobre mí" description="Quién escribe Jardín de Bits, para quién y cómo trabajo: experiencia propia, fechas de revisión y enlaces de afiliado siempre avisados.">
+	<div class="contenedor pagina">
+		<h1>Sobre mí</h1>
+		<div class="lectura">
+			<p class="entradilla">
+				Me llamo María y {SITE_TITLE} es mi forma de aprender tecnología en voz alta: guías, herramientas y recursos
+				probados por quien los usa.
+			</p>
+
+			<!--
+				PENDIENTE (María): aquí falta tu historia, en primera persona y con tus datos reales.
+				Por ejemplo: de dónde vienes, qué estudias, qué certificaciones has sacado y qué te gustaría haber sabido al empezar.
+				Los datos concretos (empresas, ciudades, títulos) los decides tú; no los he escrito por ti.
+			-->
+
+			<h2>Qué es este sitio</h2>
+			<p>
+				Un blog que se actualiza como un jardín: cada contenido nace como semilla, se revisa y se conecta con el resto. Las
+				redes sociales son la puerta de entrada y el blog es la casa.
+			</p>
+
+			<h2>Para quién</h2>
+			<p>
+				Para estudiantes de informática o FP, juniors y personas que cambian de carrera, en España y Latinoamérica. Y
+				también para quien se muda a España para estudiar o trabajar en tecnología. Si te sientes perdido entre tanta
+				información, o te da miedo pagar por un curso o una herramienta equivocada, escribo para ti.
+			</p>
+
+			<h2>Cómo trabajo</h2>
+			<ul>
+				<li>Cuento mi experiencia, con capturas y errores reales, en lugar de resumir la web oficial.</li>
+				<li>Cada artículo lleva una etiqueta (Semilla, Brote o Árbol) y la fecha en que lo revisé.</li>
+				<li>Recomiendo solo lo que he usado o investigado a fondo.</li>
+				<li>
+					Si un enlace me da comisión, lo aviso en la página y lo explico en el <a href="/aviso-de-afiliacion/">aviso de afiliación</a>.
+				</li>
+				<li>Escribo con mi nombre y mi voz, aunque no verás mi cara por aquí.</li>
+			</ul>
+
+			<p><a class="boton" href="/contacto/">Escríbeme</a></p>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+</style>

@@ -13,6 +13,8 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			revisado: z.coerce.date(),
 			afiliado: z.boolean(),
+			// Los borradores se pueden subir al repositorio sin que se publiquen.
+			borrador: z.boolean().default(false),
 			idioma: z.enum(['es', 'en']).default('es'),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),

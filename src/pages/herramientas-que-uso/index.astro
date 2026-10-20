@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Herramientas que uso" description="Las herramientas que uso de verdad y el criterio con el que las recomiendo en Jardín de Bits." noindex>
+	<div class="contenedor pagina">
+		<h1>Herramientas que uso</h1>
+		<div class="lectura">
+			<p class="entradilla">Aquí irán las herramientas que uso de verdad, cada una con para qué la uso y cuándo no la elegiría.</p>
+			<p class="pendiente">Todavía no hay ninguna publicada: solo añadiré una cuando la haya usado el tiempo suficiente para opinar con datos.</p>
+			<h2>El criterio</h2>
+			<ul>
+				<li>La uso yo, o la he investigado a fondo y te digo qué parte no he probado.</li>
+				<li>Cuento lo que cuesta el primer año y lo que cuesta al renovar.</li>
+				<li>Indico para quién es buena y para quién no.</li>
+				<li>Si el enlace me da comisión, lo marco como enlace de afiliado y lo explico en el <a href="/aviso-de-afiliacion/">aviso de afiliación</a>.</li>
+			</ul>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.pendiente {
+		padding: 1rem 1.2rem;
+		border-left: 6px solid var(--lila);
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+	}
+</style>

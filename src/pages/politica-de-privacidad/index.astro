@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Política de privacidad" description="Aquí explicaré qué datos recoge este sitio y para qué." noindex>
+	<div class="contenedor pagina">
+		<h1>Política de privacidad</h1>
+		<div class="lectura">
+			<p>Aquí explicaré qué datos recoge este sitio y para qué.</p>
+			<p class="pendiente">Este texto se está redactando y se publicará antes de activar enlaces de afiliado, newsletter o anuncios.</p>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.pendiente {
+		padding: 1rem 1.2rem;
+		border-left: 6px solid var(--lila);
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+	}
+</style>

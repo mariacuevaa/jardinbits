@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Newsletter" description="La newsletter de Jardín de Bits todavía no está activa." noindex>
+	<div class="contenedor pagina">
+		<h1>Newsletter</h1>
+		<div class="lectura">
+			<p class="entradilla">Todavía no hay newsletter.</p>
+			<p>La idea es enviar un correo semanal con lo que he aprendido, las guías nuevas o actualizadas y los recursos que merezcan tu tiempo. Cuando esté lista, el formulario aparecerá aquí.</p>
+			<p class="pendiente">No recojo correos hasta tener activo el formulario y la política de privacidad.</p>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.pendiente {
+		padding: 1rem 1.2rem;
+		border-left: 6px solid var(--lila);
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+	}
+</style>

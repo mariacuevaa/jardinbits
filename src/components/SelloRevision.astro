@@ -1,0 +1,29 @@
+---
+interface Props {
+	fecha: Date;
+}
+const { fecha } = Astro.props;
+const texto = fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<p class="sello">
+	<svg viewBox="0 0 10 10" width="10" height="10" aria-hidden="true"><rect width="10" height="10" fill="currentColor"></rect></svg>
+	<span>Revisado el <time datetime={fecha.toISOString().slice(0, 10)}>{texto}</time></span>
+</p>
+
+<style>
+	.sello {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55em;
+		margin: 0;
+		padding: 0.25em 0.9em 0.3em;
+		border: 2px solid var(--lila);
+		border-radius: 2px;
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+		font-size: 0.9rem;
+	}
+	.sello svg {
+		color: var(--lila);
+	}
+</style>

@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Recursos" description="Rutas de estudio, listas de comprobación y plantillas para empezar en tecnología." noindex>
+	<div class="contenedor pagina">
+		<h1>Recursos</h1>
+		<div class="lectura">
+			<p class="entradilla">Aquí vivirán las rutas de estudio, las listas de comprobación y las plantillas descargables.</p>
+			<p class="pendiente">Estoy preparando los primeros. Si quieres saber cuándo salen, sigue @jardinbits en redes.</p>
+		</div>
+	</div>
+</Base>
+
+<style>
+	.pagina {
+		padding-block: clamp(2.5rem, 6vw, 4.5rem) 0;
+	}
+	.entradilla {
+		font-size: 1.25rem;
+	}
+	.pendiente {
+		padding: 1rem 1.2rem;
+		border-left: 6px solid var(--lila);
+		background: color-mix(in srgb, var(--lila) 18%, var(--crema));
+	}
+</style>
